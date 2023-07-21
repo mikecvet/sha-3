@@ -1,0 +1,26 @@
+[package]
+name = "sha-3"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "sha_3"
+path = "src/main.rs"
+
+[lib]
+name = "sha_3"
+path = "src/lib.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+
+[dependencies]
+colored = "2.0.4"
+clap = { version = "4.2.7", features = ["derive"] }
+base64 = "0.13.0"
+hex = "0.4.3"
