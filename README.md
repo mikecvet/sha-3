@@ -37,6 +37,6 @@ I tested the performance of this code on the [2006 English Wikipedia Corpus](htt
     ~/code/sha-3 ~>> time ./target/release/sha3 --path ~/Downloads/wiki/enwik9 --algo 512
     5675affe508b9bbaf2eee12f0e8f7f6aed51fe8428b71e6a64b067f6492e40fd7160b3b19eff2dff3056487e3aeccd3c94f5cc81732c5cb9ced7641978eef2f4
 
-    real	0m3.548s
-    user	0m3.321s
-    sys	0m0.225s 
+    real	0m3.529s
+    user	0m3.324s
+    sys	0m0.199s
