@@ -2,7 +2,7 @@
 use colored::Colorize;
 use clap::{arg, Command};
 use std::{fs, io::Read};
-use sha_3::{hash, hash_string};
+use sha3::{hash, hash_string};
 
 fn 
 run_test(n: usize, input: &str, expected: &str) {
@@ -57,14 +57,16 @@ main () {
     let n = match algo.as_deref() {
         None => {
             if test.is_none() {
-                println!("no algorithim specified; assuming SHA-256");
+                println!("no algorithim specified; assuming SHA3-256");
             }
             256
         },
         Some(s) => match s.as_str() {
             "224" => 224,
             "256" => 256,
-            _ => panic!("unsupported algorithm; provide either '224' or '256'"),
+            "384" => 384,
+            "512" => 512,
+            _ => panic!("unsupported algorithm; provide ['224', '256', '384' or '512'"),
         },
     };
 
