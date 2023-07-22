@@ -27,6 +27,10 @@ impl TestState {
     fn failure(&mut self) {
         self.test_runs += 1;
     }
+
+    fn all_passed(&mut self) -> bool {
+        return  self.test_runs == self.test_successes;
+    }
 }
 
 fn 
@@ -66,8 +70,8 @@ tests() {
     run_test(512, &mut test_state, "1d7c3aa6ee17da5f4aeb78be968aa38476dbee54842e1ae2856f4c9a5cd04d45dc75c2902182b07c130ed582d476995b502b8777ccf69f60574471600386639b", 
 "31f82868746cf95d8fdeccd6f91fd6d998297eba09c87da23d8e174ba2a51acda1c26a5a5c601c0f1292ed9585a706780b77cfbfa2d56cc168743f4cd30ffea3");
 
-    if test_state.test_successes == test_state.test_runs {
-        println!("All tests completed successfully!")
+    if test_state.all_passed() {
+        println!("All {} tests completed successfully!", test_state.test_runs);
     } else {
         println!("{}[{} / {}] passed", "Test failures: ".bold().red(), test_state.test_successes, test_state.test_runs);
     }
@@ -76,9 +80,9 @@ tests() {
 
 fn 
 main () {
-    let matches = Command::new("sha2")
+    let matches = Command::new("sha3")
         .version("0.1")
-        .about("Fun with cryptographic hash functions")
+        .about("SHA3-224, 256, 384 and 512")
         .arg(arg!(--path <VALUE>).required(false))
         .arg(arg!(--string <VALUE>).required(false))
         .arg(arg!(--algo <VALUE>).required(false))
@@ -92,7 +96,7 @@ main () {
 
     let n = match algo.as_deref() {
         None => {
-            if test.is_none() {
+            if test.is_none() || !test.unwrap() {
                 println!("no algorithim specified; assuming SHA3-256");
             }
             256
@@ -102,7 +106,10 @@ main () {
             "256" => 256,
             "384" => 384,
             "512" => 512,
-            _ => panic!("unsupported algorithm; provide ['224', '256', '384' or '512'"),
+            _ => {
+                println!("unsupported algorithm; provide '224', '256', '384' or '512'");
+                return;
+            }
         },
     };
 
