@@ -34,7 +34,7 @@ impl TestState {
 }
 
 fn 
-run_test(n: usize, test_state: &mut TestState, input: &str, expected: &str) {
+run_test (n: usize, test_state: &mut TestState, input: &str, expected: &str) {
     if hash_string(input, n).eq(expected) {
         print!("{}", "[OK]".bold().green());
         println!(" SHA3-{} (\"{}\")", n, input);
@@ -47,7 +47,7 @@ run_test(n: usize, test_state: &mut TestState, input: &str, expected: &str) {
 }
 
 fn
-tests() {
+tests () {
     let mut test_state = TestState::default();
 
     run_test(224, &mut test_state, "", "6b4e03423667dbb73b6e15454f0eb1abd4597f9a1b078e3f5b5a6bc7");

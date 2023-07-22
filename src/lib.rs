@@ -1,4 +1,3 @@
-
 /*
  * From https://keccak.team/keccak_specs_summary.html
  * 
@@ -54,6 +53,7 @@ impl State {
      * by the index value.
      */
     fn absorb (&mut self, indx: usize, word: u64) {
+        // Some transformation from single index to element in this 2D state array
         self.state[indx / 5][indx % 5] ^= word;
     }
 
@@ -93,9 +93,9 @@ impl State {
      *   Rnd(A, ir) = ι(χ(π(ρ(θ(A)))), ir).
      * 
      * See also https://keccak.team/keccak_specs_summary.html for pseudo-code descriptions of 
-     * this permutation and the underlying functions.
+     * this permutation, its 24 rounds, and the underlying functions.
      */
-    fn permute(&mut self) {
+    fn permute (&mut self) {
         for i in 0..24 {
             self.theta();
             self.rho_and_pi();
@@ -148,6 +148,7 @@ impl State {
     fn rho_and_pi (&mut self) {
         let mut b: [[u64; 5]; 5] = [[0; 5]; 5];
     
+        // Collect the rotated integers
         for x in 0..5 {
             for y in 0..5 {
                 let y2 = (3 * y + 2 * x) % 5;
@@ -155,6 +156,7 @@ impl State {
             }
         }
     
+        // Copy them back into the state
         for x in 0..5 {
             for y in 0..5 {
                 self.state[x][y] = b[x][y];
