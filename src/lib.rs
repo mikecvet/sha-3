@@ -66,9 +66,9 @@ impl State {
      * number of digest bytes corresponding to the request digest output size.
      */
     fn squeeze (&mut self, rate: usize, md_size: usize) -> Vec<u8> {
-        let mut bytes = Vec::new();
         let num_words = rate / 64;
         let len_bytes = md_size / 8;
+        let mut bytes = Vec::with_capacity(len_bytes * 2);
 
         // Iterates until sufficient bytes have been read to fill the final message digest byte vector
         while bytes.len() < len_bytes {
@@ -232,7 +232,7 @@ fn
 pad (message: &mut Vec<u8>, rate: usize) {
 
     let rate_bytes = rate / 8;
-    if message.len() == rate_bytes -1 {
+    if message.len() == rate_bytes - 1 {
         // Special case. 0x06 and 0x80 must always be present. If the message length is 1 byte less than a 
         // multiple of the rate, append these two values OR'd together so the last byte is 0x86
         message.push(0x06 | 0x80);
