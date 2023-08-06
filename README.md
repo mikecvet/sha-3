@@ -1,6 +1,6 @@
 # SHA-3 in Rust
 
-This is a readable and highly annotated implementation of the SHA-3 cryptographic digest algorithm, implemented in Rust. Most operations cite reference material explaining which part of the algorithm specification they're derived from. 
+This is a readable and highly annotated implementation of the SHA-3 cryptographic digest algorithm, implemented in Rust. Most operations cite reference material explaining which part of the algorithm specification they're derived from. This code is discussed in [this blog post](https://medium.com/better-programming/learning-rust-with-sha-3-and-friends-34c840fcb13).
 
 This code is written to run on a 64-bit little-endian architecture. In my case, this runs on an Apple M2. There are a few simple arguments to the program:
 
